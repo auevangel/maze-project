@@ -1,0 +1,11 @@
+body h2 {
+    display: block;
+    font-size: larger;
+    align-items: center;
+    text-align: center;
+}
+#menu {
+    display: block;
+    align-items: center;
+    text-align: center;
+}

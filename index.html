@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Treasure Hunt Game!</title>
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
+    <h2>Welcome to the Treasure Hunt Game!</h2>
+    <div id="menu">
+        <div class="custom-select">
+          <select id="diffSelect">
+                    <option value="10">Easy</option>
+                    <option value="15">Medium</option>
+                    <option value="25">Hard</option>
+                    <option value="38">Extreme</option>                                      
+                </select>
+        </div>
+        <input id="startMazeBtn" type="button" onclick="makeMaze()" value="Start" />
+      </div>
     <canvas width="1000" height="1000" id="mazeCanvas"></canvas>
 </body>
 </html>
