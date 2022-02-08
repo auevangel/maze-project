@@ -7,6 +7,9 @@ var mazeWidth;
 var player;
 var level = 1;
 var playerImage, targetImage;
+var backgroundMusic = new Audio('./assets/audio/background.mp3');
+var isPlaying = false;
+
 /* player object initialization*/
 function Player() {
     this.col = 0;
@@ -217,6 +220,7 @@ function onKeyDown(event) {
     }
 
     if (player.row == (maze.rows - 1) && player.col == (maze.cols - 1)) {
+        claphands();
         document.getElementById("playerSteps").innerText = player.steps;
         changeStep("step4");
         const soundElement = document.getElementById("cheering_sound");
@@ -275,12 +279,11 @@ function changeStep(activeStep) {
 function onLoad() {
     changeStep("step1");
     document.addEventListener("keydown", onKeyDown);
-
     playerImage = new Image();
-    playerImage.src = 'Content/sprite.png';
-
+    playerImage.src = './assets/images/sprite.png';
     targetImage = new Image();
-    targetImage.src = 'Content/finishSprite.png';
-
+    targetImage.src = './assets/images/finishSprite.png';
 }
+
+
 
