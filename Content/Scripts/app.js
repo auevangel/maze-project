@@ -1,5 +1,4 @@
-﻿/*ES5 (ecmaScript5) - Functions*/
-var ctx;
+﻿var ctx;
 var canvas;
 var maze;
 var mazeHeight;
@@ -7,13 +6,13 @@ var mazeWidth;
 var player;
 var level = 1;
 var playerImage, targetImage;
-/* player object initialization*/
+
 function Player() {
     this.col = 0;
     this.row = 0;
     this.steps = 0;
 }
-/* initiating object cell properties */
+
 function Cell(col, row) {
     this.col = col;
     this.row = row;
@@ -25,18 +24,16 @@ function Cell(col, row) {
 
     this.visited = false;
 }
-/* maze */
+
 function Maze(cols, rows, cellSize) {
-    this.backgroundColor = "#cfa9f7" ;
-  /*this.backgroundColor = "#7fffd4" ;*/
+    this.backgroundColor = "#ffffff";
     this.mazeColor = "#000000";
-    
 
     this.cols = cols;
     this.rows = rows;
 
     this.cellSize = cellSize;
-/*Array*/
+
     this.cells = [];
 
     this.generate = function () {
@@ -47,7 +44,6 @@ function Maze(cols, rows, cellSize) {
         canvas.width = mazeWidth;
         canvas.style.height = mazeHeight;
         canvas.style.width = mazeWidth;
-        
 
         for (var col = 0; col < this.cols; col++) {
             this.cells[col] = [];
@@ -55,7 +51,7 @@ function Maze(cols, rows, cellSize) {
                 this.cells[col][row] = new Cell(col, row);
             }
         }
-/* in stack push and pop, /depth first search/LIFO, pick random cell*/ 
+
         var rndCol = Math.floor(Math.random() * this.cols);
         var rndRow = Math.floor(Math.random() * this.rows);
 
@@ -120,7 +116,7 @@ function Maze(cols, rows, cellSize) {
 
         this.redraw();
     };
-/* finding unvisited neighbour*/
+
     this.hasUnvisited = function () {
         for (var col = 0; col < this.cols; col++) {
             for (var row = 0; row < this.rows; row++) {
@@ -139,13 +135,13 @@ function Maze(cols, rows, cellSize) {
             (cell.row !== 0 && !this.cells[cell.col][cell.row - 1].visited) ||
             (cell.row !== (this.rows - 1) && !this.cells[cell.col][cell.row + 1].visited));
     };
-/*redraw maze*/
+
     this.redraw = function () {
         ctx.fillStyle = this.backgroundColor;
         ctx.fillRect(0, 0, mazeHeight, mazeWidth);
-/*defining area for target image, treasure box */
+
         ctx.drawImage(targetImage, (this.cols - 1) * this.cellSize, (this.rows - 1) * this.cellSize, this.cellSize, this.cellSize);
-/* draw lines on canvas*/
+
         ctx.strokeStyle = this.mazeColor;
         ctx.strokeRect(0, 0, mazeHeight, mazeWidth);
 
@@ -177,11 +173,11 @@ function Maze(cols, rows, cellSize) {
                 }
             }
         }
-/* draw player image on canvas*/
+
         ctx.drawImage(playerImage, (player.col * this.cellSize) + 2, (player.row * this.cellSize) + 2, this.cellSize - 4, this.cellSize - 4);
     };
 }
-/* key strocks to count steps*/
+
 function onKeyDown(event) {
     switch (event.keyCode) {
         case 37:
@@ -219,8 +215,6 @@ function onKeyDown(event) {
     if (player.row == (maze.rows - 1) && player.col == (maze.cols - 1)) {
         document.getElementById("playerSteps").innerText = player.steps;
         changeStep("step4");
-        const soundElement = document.getElementById("cheering_sound");
-        soundElement.play();
     }
     else {
         maze.redraw();
@@ -230,7 +224,7 @@ function onKeyDown(event) {
 function onLevelChange() {
     level = parseInt(event.target.value);
 }
-/* 2 dimension canvas for 4 levels  cols,rows and cell height*/
+
 function setupGame() {
     canvas = document.getElementById("gamecv");
     ctx = canvas.getContext("2d");
@@ -245,20 +239,19 @@ function setupGame() {
             maze = new Maze(20, 20, 25);
             break;
         case 3:
-            maze = new Maze(22, 22, 25);
-
+            maze = new Maze(25, 25, 25);
             break;
         case 4:
-            maze = new Maze(25, 25, 25);
+            maze = new Maze(30, 30, 25);
             break;
     }
 
     maze.generate();
 }
 
-
 function changeStep(activeStep) {
     var steps = document.getElementsByClassName('step');
+
     for (var i = 0; i < steps.length; i++) {
         var el = steps[i];
         if (el.classList.contains(activeStep)) {
@@ -268,10 +261,8 @@ function changeStep(activeStep) {
             el.style.display = 'none';
         }
     }
-
 }
 
-/* on new page player and tresure*/
 function onLoad() {
     changeStep("step1");
     document.addEventListener("keydown", onKeyDown);
@@ -281,6 +272,4 @@ function onLoad() {
 
     targetImage = new Image();
     targetImage.src = 'Content/finishSprite.png';
-
 }
-
