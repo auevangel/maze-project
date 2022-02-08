@@ -1,29 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treasure Hunt Game!</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <meta charset="utf-8" />
+    <title>Maze Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="./styles/app.css" rel="stylesheet" />
+    <link href="./favicon.ico" />
 </head>
-<body>
-    <h2>Welcome to the Treasure Hunt Game!</h2>
-    <div id="menu">
-        <div class="custom-select">
-          <select id="diffSelect">
-            <option value="10">Easy</option>
-            <option value="20">Medium</option>
-            <option value="30">Hard</option>
-            <option value="40">Extreme</option>                                     
-          </select>
+<body onload="onLoad()">
+    <div class="steps">
+        <div class="step1 step">
+            <div class="text-center">
+                <h1 class="animate-charcter">Welcome to Maze Game</h1><br />
+                <button type="button" class="btn btn-primary btn-lg" onclick="changeStep('step2')">Play Game</button>
+            </div>
         </div>
-        <input id="startMazeBtn" type="button" onclick="makeMaze()" value="Start" />
-      </div>
-      <div id="view">
-        <div id="mazeContainer">
-          <canvas id="mazeCanvas" class="border" height="1000" width="1000"></canvas>
+        <div class="step2 step">
+            <div class="text-center">
+                <h1 class="animate-charcter">Select difficulty level</h1><br />
+                <select class="form-select" onchange="onLevelChange()" style="width:200px;">
+                    <option value="1">Easy</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Hard</option>
+                    <option value="4">Extream</option>
+                </select><br />
+                <button type="button" class="btn btn-primary btn-lg" onclick="setupGame(); changeStep('step3');">Start</button>
+            </div>
         </div>
-      </div>
+        <div class="step3 step">
+            <div class="text-center">
+                <br /><br />
+                <button type="button" class="btn btn-primary btn-lg" onclick="changeStep('step2');">Change Level</button><br /><br /><br />
+                <canvas id="gamecv"></canvas>
+            </div>
+        </div>
+        <div class="step4 step">
+            <div class="text-center">
+                <h1 class="animate-charcter">Congratulations!</h1><br />
+                <h1>You took <span id="playerSteps"></span> steps</h1><br />
+                <button type="button" class="btn btn-primary btn-lg" onclick="changeStep('step2');">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./scripts/app.js"></script>
 </body>
 </html>
