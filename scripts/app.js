@@ -7,6 +7,9 @@ var mazeWidth;
 var player;
 var level = 1;
 var playerImage, targetImage;
+var backgroundMusic = new Audio('./assets/audio/background.mp3');
+var isPlaying = false;
+
 /* player object initialization*/
 function Player() {
     this.col = 0;
@@ -214,6 +217,7 @@ function onKeyDown(event) {
     }
 
     if (player.row == (maze.rows - 1) && player.col == (maze.cols - 1)) {
+        claphands();
         document.getElementById("playerSteps").innerText = player.steps;
         changeStep("step4");
     }
@@ -267,15 +271,18 @@ function changeStep(activeStep) {
 function onLoad() {
     changeStep("step1");
     document.addEventListener("keydown", onKeyDown);
-
     playerImage = new Image();
     playerImage.src = './assets/images/sprite.png';
-
     targetImage = new Image();
     targetImage.src = './assets/images/finishSprite.png';
 }
 
-function play() {
-    var audio = new Audio('./assets/audio/applause2.mp3');
-    audio.play();
+const claphands = () => {
+    const clap = new Audio('./assets/audio/applause2.mp3');
+    backgroundMusic.pause();
+    clap.play();
   }
+
+const playMusic = () => {
+    isPlaying ? backgroundMusic.pause() : backgroundMusic.play(); 
+} 
