@@ -274,3 +274,8 @@ function onLoad() {
     targetImage = new Image();
     targetImage.src = './assets/images/finishSprite.png';
 }
+
+function play() {
+    var audio = new Audio('./assets/audio/applause2.mp3');
+    audio.play();
+  }

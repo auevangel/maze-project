@@ -22,7 +22,7 @@
                     <option value="1">Easy</option>
                     <option value="2">Medium</option>
                     <option value="3">Hard</option>
-                    <option value="4">Extream</option>
+                    <option value="4">Extreme</option>
                 </select><br />
                 <button type="button" class="btn btn-primary btn-lg" onclick="setupGame(); changeStep('step3');">Start</button>
             </div>
@@ -36,9 +36,12 @@
         </div>
         <div class="step4 step">
             <div class="text-center">
+                <audio loop autoplay>
+                    <source src="./assets/audio/background.mp3" type="audio/mp3">
+                </audio>
                 <h1 class="animate-charcter">Congratulations!</h1><br />
                 <h1>You took <span id="playerSteps"></span> steps</h1><br />
-                <button type="button" class="btn btn-primary btn-lg" onclick="changeStep('step2');">Play Again</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="changeStep('step2');audio.stop();">Play Again</button>
             </div>
         </div>
     </div>
