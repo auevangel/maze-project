@@ -20,12 +20,10 @@ function Player() {
 function Cell(col, row) {
     this.col = col;
     this.row = row;
-
     this.right = true;
     this.up = true;
     this.down = true;
     this.left = true;
-
     this.visited = false;
 }
 /* maze */
@@ -38,17 +36,13 @@ function Maze(cols, rows, cellSize) {
     this.cellSize = cellSize;
 /*Array*/
     this.cells = [];
-
     this.generate = function () {
         mazeHeight = this.rows * this.cellSize;
         mazeWidth = this.cols * this.cellSize;
-
         canvas.height = mazeHeight;
         canvas.width = mazeWidth;
         canvas.style.height = mazeHeight;
         canvas.style.width = mazeWidth;
-        
-
         for (var col = 0; col < this.cols; col++) {
             this.cells[col] = [];
             for (var row = 0; row < this.rows; row++) {
@@ -58,15 +52,12 @@ function Maze(cols, rows, cellSize) {
 /* in stack push and pop, /depth first search/LIFO, pick random cell*/ 
         var rndCol = Math.floor(Math.random() * this.cols);
         var rndRow = Math.floor(Math.random() * this.rows);
-
         var stack = [];
         stack.push(this.cells[rndCol][rndRow]);
-
         var currCell;
         var dir;
         var foundNeighbor;
         var nextCell;
-
         while (this.hasUnvisited(this.cells)) {
             currCell = stack[stack.length - 1];
             currCell.visited = true;
