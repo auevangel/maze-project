@@ -20,10 +20,12 @@ function Player() {
 function Cell(col, row) {
     this.col = col;
     this.row = row;
+
     this.right = true;
     this.up = true;
     this.down = true;
     this.left = true;
+
     this.visited = false;
 }
 /* maze */
@@ -31,21 +33,22 @@ function Maze(cols, rows, cellSize) {
     this.backgroundColor = "#cfa9f7" ;
   /*this.backgroundColor = "#7fffd4" ;*/
     this.mazeColor = "#000000";
-    
-
     this.cols = cols;
     this.rows = rows;
-
     this.cellSize = cellSize;
 /*Array*/
     this.cells = [];
+
     this.generate = function () {
         mazeHeight = this.rows * this.cellSize;
         mazeWidth = this.cols * this.cellSize;
+
         canvas.height = mazeHeight;
         canvas.width = mazeWidth;
         canvas.style.height = mazeHeight;
         canvas.style.width = mazeWidth;
+        
+
         for (var col = 0; col < this.cols; col++) {
             this.cells[col] = [];
             for (var row = 0; row < this.rows; row++) {
@@ -55,12 +58,15 @@ function Maze(cols, rows, cellSize) {
 /* in stack push and pop, /depth first search/LIFO, pick random cell*/ 
         var rndCol = Math.floor(Math.random() * this.cols);
         var rndRow = Math.floor(Math.random() * this.rows);
+
         var stack = [];
         stack.push(this.cells[rndCol][rndRow]);
+
         var currCell;
         var dir;
         var foundNeighbor;
         var nextCell;
+
         while (this.hasUnvisited(this.cells)) {
             currCell = stack[stack.length - 1];
             currCell.visited = true;
@@ -214,8 +220,6 @@ function onKeyDown(event) {
         claphands();
         document.getElementById("playerSteps").innerText = player.steps;
         changeStep("step4");
-        const soundElement = document.getElementById("cheering_sound");
-        soundElement.play();
     }
     else {
         maze.redraw();
@@ -234,26 +238,25 @@ function setupGame() {
 
     switch (level) {
         case 1:
-            maze = new Maze(10, 10, 25);
+            maze = new Maze(10, 10, 20);
             break;
         case 2:
-            maze = new Maze(20, 20, 25);
+            maze = new Maze(15, 15, 20);
             break;
         case 3:
-            maze = new Maze(22, 22, 25);
-
+            maze = new Maze(20, 20, 20);
             break;
         case 4:
-            maze = new Maze(25, 25, 25);
+            maze = new Maze(25, 25, 20);
             break;
     }
 
     maze.generate();
 }
 
-
 function changeStep(activeStep) {
     var steps = document.getElementsByClassName('step');
+
     for (var i = 0; i < steps.length; i++) {
         var el = steps[i];
         if (el.classList.contains(activeStep)) {
@@ -263,9 +266,7 @@ function changeStep(activeStep) {
             el.style.display = 'none';
         }
     }
-
 }
-
 /* on new page player and tresure*/
 function onLoad() {
     changeStep("step1");
@@ -276,5 +277,12 @@ function onLoad() {
     targetImage.src = './assets/images/finishSprite.png';
 }
 
+const claphands = () => {
+    const clap = new Audio('./assets/audio/applause2.mp3');
+    backgroundMusic.pause();
+    clap.play();
+  }
 
-
+const playMusic = () => {
+    isPlaying ? backgroundMusic.pause() : backgroundMusic.play(); 
+} 
